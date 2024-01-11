@@ -1,0 +1,6 @@
+{
+  "type": "module",
+  "dependencies": {
+    "e-karma": "^1.0.0"
+  }
+}
