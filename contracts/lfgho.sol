@@ -1,15 +1,17 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 import {IGhoToken} from "https://github.com/aave/gho-core/blob/main/src/contracts/gho/interfaces/IGhoToken.sol";
-import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
+import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
 
-contract lfgho is IGhoToken, ERC20 {
+contract lfgho is IGhoToken, ERC20 , AccessControl{
     address public admin;
     string value1="This function is not in use";
     bytes32 value2="This function is not in use";
     uint256 a=1;
     uint256 b=1;
-    address[2] arr=["0x0000000000000000000000000000000000000000","0x0000000000000000000000000000000000000000"];
+    // address[2] arr=[address(0x0000000000000000000000000000000000000000),address(0x0000000000000000000000000000000000000000)];
+    address[] arr; 
 
     constructor() ERC20("Gho Token", "GHO") {
         admin = msg.sender;
@@ -23,7 +25,7 @@ contract lfgho is IGhoToken, ERC20 {
       
 
         _mint(account, amount);
-    }
+    } 
 
     function addFacilitator(  address facilitatorAddress,string calldata facilitatorLabel,uint128 bucketCapacity) external  {
         value1="This function is not in use";
@@ -54,7 +56,7 @@ contract lfgho is IGhoToken, ERC20 {
 
   
   function getFacilitator(address facilitator) external view returns (Facilitator memory){
-    return Facilitator;
+    return _facilitators[facilitator];
   }
 
  
