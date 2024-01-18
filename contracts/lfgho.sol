@@ -1,10 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
-import {IGhoToken} from "./IGhoToken.sol";
+import {IGhoToken} from "https://github.com/aave/gho-core/blob/main/src/contracts/gho/interfaces/IGhoToken.sol";
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
+import {EnumerableSet} from "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 
 contract lfgho is IGhoToken, ERC20, AccessControl {
+    using EnumerableSet for EnumerableSet.AddressSet;
+
     address public admin;
     uint256 num;
 
@@ -16,6 +19,8 @@ contract lfgho is IGhoToken, ERC20, AccessControl {
         address addrs;
     }
     mapping(address => MyFacilitator) internal myFacilitators;
+
+    mapping(address => EnumerableSet.AddressSet) private vouchSet;
 
     constructor() ERC20("Gho Token", "GHO") {
         admin = msg.sender;
@@ -40,10 +45,17 @@ contract lfgho is IGhoToken, ERC20, AccessControl {
             "You are not a valid facilitator"
         );
         myFacilitators[account].count++;
+        vouchSet[account].add(msg.sender);
     }
 
     function burn(uint256 amount) external {
         value1 = "This function is not in use";
+    }
+
+    function getAllVouch(
+        address account
+    ) public view returns (address[] memory) {
+        return vouchSet[account].values();
     }
 
     function getDetails(
