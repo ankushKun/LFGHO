@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
-import {IGhoToken} from "https://github.com/aave/gho-core/blob/main/src/contracts/gho/interfaces/IGhoToken.sol";
+import {IGhoToken} from "./IGhoToken.sol";
 import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
 import {EnumerableSet} from "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 
-contract lfgho is IGhoToken, ERC20, AccessControl {
+contract Lfgho is IGhoToken, ERC20, AccessControl {
     using EnumerableSet for EnumerableSet.AddressSet;
 
     address public admin;
@@ -16,9 +16,12 @@ contract lfgho is IGhoToken, ERC20, AccessControl {
         uint256 bucketLevel;
         string label;
         uint256 count;
+        uint256 value;
         address addrs;
     }
     mapping(address => MyFacilitator) internal myFacilitators;
+
+    // EnumerableSet.AddressSet public mySet;
 
     mapping(address => EnumerableSet.AddressSet) private vouchSet;
 
@@ -44,8 +47,39 @@ contract lfgho is IGhoToken, ERC20, AccessControl {
             myFacilitators[msg.sender].bucketLevel == 1,
             "You are not a valid facilitator"
         );
+        require(
+            vouchSet[account].contains(msg.sender) == false,
+            "You already vouch for this address"
+        ); // Only one time you can vouch for an address
+
         myFacilitators[account].count++;
         vouchSet[account].add(msg.sender);
+        if (
+            myFacilitators[msg.sender].count >= 0 &&
+            myFacilitators[msg.sender].count < 10
+        ) {
+            myFacilitators[account].value++;
+        } else if (
+            myFacilitators[msg.sender].count >= 10 &&
+            myFacilitators[msg.sender].count < 100
+        ) {
+            myFacilitators[account].value = myFacilitators[account].value + 2;
+        } else if (
+            myFacilitators[msg.sender].count >= 100 &&
+            myFacilitators[msg.sender].count < 500
+        ) {
+            myFacilitators[account].value = myFacilitators[account].value + 3;
+        } else if (
+            myFacilitators[msg.sender].count >= 500 &&
+            myFacilitators[msg.sender].count < 1000
+        ) {
+            myFacilitators[account].value = myFacilitators[account].value + 4;
+        } else if (
+            myFacilitators[msg.sender].count >= 1000 &&
+            myFacilitators[msg.sender].count < 10000
+        ) {
+            myFacilitators[account].value = myFacilitators[account].value + 5;
+        }
     }
 
     function burn(uint256 amount) external {
