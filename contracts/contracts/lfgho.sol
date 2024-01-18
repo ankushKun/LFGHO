@@ -5,7 +5,7 @@ import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
 import {EnumerableSet} from "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 
-contract Lfgho is IGhoToken, ERC20, AccessControl {
+contract lfgho is IGhoToken, ERC20, AccessControl {
     using EnumerableSet for EnumerableSet.AddressSet;
 
     address public admin;
