@@ -22,7 +22,7 @@ const config = createConfig(
     // Optional
     appDescription: "Your own on-chain Karma point system",
     appUrl: "https://family.co",
-    appIcon: "https://family.co/logo.png",
+    appIcon: "https://i.pinimg.com/736x/64/d6/0f/64d60f03aff21e923652c55a686cc421.jpg",
 
     chains: [sepolia],
   })
@@ -31,7 +31,7 @@ const config = createConfig(
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <WagmiConfig config={config}>
-      <ConnectKitProvider>
+      <ConnectKitProvider theme="soft" >
         <App />
       </ConnectKitProvider>
     </WagmiConfig>
