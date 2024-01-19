@@ -5,11 +5,8 @@ import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
 import {EnumerableSet} from "@openzeppelin/contracts/utils/structs/EnumerableSet.sol";
 
-contract lfgho is IGhoToken, ERC20, AccessControl {
+contract Lfgho is IGhoToken, ERC20, AccessControl {
     using EnumerableSet for EnumerableSet.AddressSet;
-
-    address public admin;
-    uint256 num;
 
     struct MyFacilitator {
         uint256 bucketCapacity;
@@ -25,11 +22,10 @@ contract lfgho is IGhoToken, ERC20, AccessControl {
 
     mapping(address => EnumerableSet.AddressSet) private vouchSet;
 
-    constructor() ERC20("Gho Token", "GHO") {
-        admin = msg.sender;
-    }
+    constructor() ERC20("Gho Token", "GHO") {}
 
     function mint(address account, uint256 amount) external {
+        require(balanceOf(account) == 0, "You are already DAO MEMBER");
         require(amount > 0, "INVALID_MINT_AMOUNT");
         myFacilitators[account].bucketCapacity = 1;
         require(
@@ -83,7 +79,7 @@ contract lfgho is IGhoToken, ERC20, AccessControl {
     }
 
     function burn(uint256 amount) external {
-        value1 = "This function is not in use";
+        _burn(msg.sender, amount);
     }
 
     function getAllVouch(
