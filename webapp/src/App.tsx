@@ -1,6 +1,8 @@
 import { ConnectKitButton } from 'connectkit';
 import { useState } from 'react'
 import { useAccount } from "wagmi";
+import { useContractRead } from "wagmi";
+
 
 
 export default function App() {
