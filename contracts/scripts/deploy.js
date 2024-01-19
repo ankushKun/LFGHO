@@ -1,6 +1,5 @@
 const hre = require("hardhat");
-
-var smartAddress;
+const fs = require("fs");
 
 async function main() {
   const currentTimestampInSeconds = Math.round(Date.now() / 1000);
@@ -11,11 +10,21 @@ async function main() {
 
   // await counterContract.deployed();
 
+  try {
+    fs.writeFileSync(
+      "./smartContractAddress.json",
+      JSON.stringify({ smartContractAddress: lfghoContract.target })
+    );
+  } catch (error) {
+    console.error(error);
+
+    throw error;
+  }
+
   console.log(
     `Contract :  timestamp ${unlockTime} deployed to ${lfghoContract.target}`
   );
 }
-
 
 main().catch((error) => {
   console.error(error);
