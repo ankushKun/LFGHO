@@ -1,29 +1,30 @@
 import React from "react";
 import lfgho from "../../../contracts/artifacts/contracts/lfgho.sol/lfgho.json";
-import {ethers} from "ethers";
+import { ethers } from "ethers";
 import { ConnectKitButton } from "connectkit";
 import { useState } from "react";
 import { useAccount } from "wagmi";
-import { useContractRead, useContractWrite } from "wagmi";
+import { useContractRead, useWriteContract } from "wagmi";
 
 export default function Input() {
   const { address, isConnecting, isDisconnected } = useAccount();
+  const { data: hash, writeContract } = useWriteContract()
 
-  // const { data, isLoading, isSuccess, write }  = useContractWrite({
-  //   address: "0x5f6734B2ee6cF2bBf05AAF7aBf03ddCEBE439049",
-  //   abi: lfgho.abi,
-  //   functionName: "mint",
-  // });
+  const { data, isLoading, isSuccess, write } = writeContract({
+    address: "0x5f6734B2ee6cF2bBf05AAF7aBf03ddCEBE439049",
+    abi: lfgho.abi,
+    functionName: "mint",
+  })
 
-  const connectionAllowingIssuer=async()=>{
-    const provider = new ethers.BrowserProvider((window as any).ethereum);
-        await (window as any).ethereum.request({ method: "eth_requestAccounts" });
-        const signer = await provider.getSigner();
-        const contract = new ethers.Contract(certificateAddress, lfgho.abi, signer);
-        const transaction = await contract.allowingIssuer(_issuerAddress,_organisationName,_companyRegisteredNumber);
-        transaction.wait();
-   }
-  
+  // const connectionAllowingIssuer=async()=>{
+  //   const provider = new ethers.BrowserProvider((window as any).ethereum);
+  //       await (window as any).ethereum.request({ method: "eth_requestAccounts" });
+  //       const signer = await provider.getSigner();
+  //       const contract = new ethers.Contract(certificateAddress, lfgho.abi, signer);
+  //       const transaction = await contract.allowingIssuer(_issuerAddress,_organisationName,_companyRegisteredNumber);
+  //       transaction.wait();
+  //  }
+
 
   return (
     <div>
