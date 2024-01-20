@@ -1,12 +1,22 @@
 {
-  "name": "e-karma",
-  "version": "1.0.0",
-  "description": "On chain karma points and vouching system",
-  "main": "index.js",
+  "name": "karma-vouch",
+  "version": "1.0.1",
+  "description": "On chain karma points and vouching system for DAOs",
+  "keywords": [
+    "DAO",
+    "vouching",
+    "karma"
+  ],
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "rollup": "rollup -c"
   },
-  "keywords": [],
   "author": "ankushKun",
-  "license": "ISC"
+  "license": "MIT",
+  "devDependencies": {
+    "@types/react": "^18.2.48",
+    "react": "^18.2.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {}
 }
