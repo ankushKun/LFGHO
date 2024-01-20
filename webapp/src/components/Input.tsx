@@ -10,6 +10,7 @@ import { useContractWrite } from "wagmi";
 export default function Input() {
   const [otherPeopleAddress1, setOtherPeopleAddress1] = useState("");
   const [otherPeopleAddress2, setOtherPeopleAddress2] = useState("");
+  const [balanceOfAddress, setBalanceOfAddress] = useState(0);
   const [getAllVouch, setgetAllVouch] = useState(["0x000001"]);
   const [getDetails, setgetDetails] = useState({
     bucketCapacity: 1,
@@ -158,15 +159,24 @@ export default function Input() {
   //////////////////////////////////////////////////////////////////////////////////
 
   return (
-    <div>
+    <div className="">
       <div>
-        <h1>Want to Become DAO Member</h1>{" "}
-        <button onClick={() => mint()}>Mint</button>
+        {balanceOfAddress === 1 ? (
+          <div>
+            <h1>Revoke as DAO Member</h1>{" "}
+            <button onClick={() => burn()}>Burn</button>
+          </div>
+        ) : (
+          <div>
+            <h1>Want to Become DAO Member</h1>{" "}
+            <button onClick={() => mint()}>Mint</button>
+          </div>
+        )}
       </div>
-      <div>
+      {/* <div>
         <h1>Revoke as DAO Member</h1>{" "}
         <button onClick={() => burn()}>Burn</button>
-      </div>
+      </div> */}
       <div>
         <h1>Do you wanna vouch for anyone? DO here </h1>
         <input
