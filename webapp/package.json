@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "connectkit": "^1.6.0",
+    "ethers": "^6.10.0",
     "mdb-react-ui-kit": "^7.1.0",
     "react": "^18.2.0",
     "react-code-blocks": "^0.1.6",
