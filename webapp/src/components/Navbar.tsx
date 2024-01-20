@@ -1,5 +1,5 @@
 import React from "react";
-import logo from '/home/bhawna/Desktop/LFGHO/webapp/public/vite.svg';
+import logo from '../../public/vite.svg';
 import { ConnectKitButton } from "connectkit";
 
 
