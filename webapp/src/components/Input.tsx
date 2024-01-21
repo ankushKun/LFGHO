@@ -73,7 +73,7 @@ export default function Input() {
     // const un = await walletClient.getAddresses();
     // console.log(typeof(un[0]));
     await walletClient.writeContract({
-      address: "0x5f6734B2ee6cF2bBf05AAF7aBf03ddCEBE439049",
+      address: "0x000E65B85A0f89f1006bC5202ecBE70D249698Ad",
       abi: lfgho.abi,
       functionName: "mint",
       args: [address, 1],
@@ -86,7 +86,7 @@ export default function Input() {
     // const un = await walletClient.getAddresses();
     // console.log(typeof(un[0]));
     await walletClient.writeContract({
-      address: "0x5f6734B2ee6cF2bBf05AAF7aBf03ddCEBE439049",
+      address: "0x000E65B85A0f89f1006bC5202ecBE70D249698Ad",
       abi: lfgho.abi,
       functionName: "burn",
       args: [1],
@@ -99,7 +99,7 @@ export default function Input() {
     // const un = await walletClient.getAddresses();
     // console.log(typeof(un[0]));
     await walletClient.writeContract({
-      address: "0x5f6734B2ee6cF2bBf05AAF7aBf03ddCEBE439049",
+      address: "0x000E65B85A0f89f1006bC5202ecBE70D249698Ad",
       abi: lfgho.abi,
       functionName: "vouch",
       args: [otherPeopleAddress1],
@@ -117,7 +117,7 @@ export default function Input() {
 
   async function balanceOf(): Promise<any> {
     await publicClient.readContract({
-      address: "0x5f6734B2ee6cF2bBf05AAF7aBf03ddCEBE439049",
+      address: "0x000E65B85A0f89f1006bC5202ecBE70D249698Ad",
       abi: lfgho.abi,
       functionName: "balanceOf",
       args: [address],
@@ -129,42 +129,48 @@ export default function Input() {
   // All these function reading from smart contract
 
   type Details = {
-    bucketCapacity: number,
-    bucketLevel: number,
-    label: string,
-    count: number,
-    value: number,
-    addrs: string
-  }
-
+    bucketCapacity: number;
+    bucketLevel: number;
+    label: string;
+    count: number;
+    value: number;
+    addrs: string;
+  };
 
   // getAllVouch will return ====>  string[]
   // getDetails will return ====> {bucketCapacity : number, bucketLevel : number, label : string, count : number, value : number, addrs : string}
   async function vouchDetails(): Promise<any> {
-    const value1 = await publicClient.readContract({
-      address: "0x5f6734B2ee6cF2bBf05AAF7aBf03ddCEBE439049",
+    const value1 = (await publicClient.readContract({
+      address: "0x000E65B85A0f89f1006bC5202ecBE70D249698Ad",
       abi: lfgho.abi,
       functionName: "getAllVouch",
       args: [otherPeopleAddress2],
       account: address as `0x${string}`,
-    }) as string[];
-    const value2 = await publicClient.readContract({
-      address: "0x5f6734B2ee6cF2bBf05AAF7aBf03ddCEBE439049",
+    })) as string[];
+    const value2 = (await publicClient.readContract({
+      address: "0x000E65B85A0f89f1006bC5202ecBE70D249698Ad",
       abi: lfgho.abi,
       functionName: "getDetails",
       args: [otherPeopleAddress2],
       account: address as `0x${string}`,
-    }) as Details;
+    })) as Details;
     console.log("Value11111111111 : " + value1);
-    console.log("Value22222222222 : " + value2);
+    //   console.log("Value22222222222 : " +  JSON.stringify(value2 , (key, value) => {
+    //     return typeof value === 'bigint' ? value.toString() : value;
+    // }) );
+    const a: any = JSON.stringify(value2, (key, value) => {
+      return typeof value === "bigint" ? value.toString() : value;
+    });
+
     setgetAllVouch(value1);
-    setgetDetails(value2);
+    setgetDetails(a);
+    console.log(getDetails);
     setOtherPeopleAddress2("");
   }
 
   // async function getDetails(): Promise<any> {
   //   await publicClient.readContract({
-  //     address: "0x5f6734B2ee6cF2bBf05AAF7aBf03ddCEBE439049",
+  //     address: "0x000E65B85A0f89f1006bC5202ecBE70D249698Ad",
   //     abi: lfgho.abi,
   //     functionName: "getDetails",
   //     args: [otherPeopleAddress2],
