@@ -39,14 +39,16 @@ An on-chain vouch based Karma system for DAOs, enabling a trust based approach f
 
 Clone the repo
 
-bash
+```bash
 git clone git@github.com:ankushKun/LFGHO.git
 cd webapp
+```
 
 ## Install dependencies
 
-bash
+```bash
 npm install
+```
 
 ## Create a .env file
 
@@ -66,8 +68,9 @@ To get VITE_WC_KEY click [here](https://cloud.walletconnect.com/sign-in)
 
  # Finally run the webapp
 
-bash
+```bash
 npm run dev
+```
 
 The webapp will be running on localhost:5173
 
