@@ -294,10 +294,10 @@ export default function Input() {
           </div>
         </div>
       </div>
-      <div className="w-2/4 flex flex-col">
+      <div className="w-full md:w-2/4 flex flex-col bg-gray-200 rounded-lg p-4">
         <div className=" flex flex-col my-0 mx-auto py-5 gap-5">
-          <h1 className="text-6xl font-medium	">count : {getDetails.count}</h1>
-          <h1 className="text-6xl font-medium">Value : {getDetails.value}</h1>
+          <h1 className="text-4xl md:text-6xl font-medium	mb-2">count : {getDetails.count}</h1>
+          <h1 className="text-4xl md:text-6xl font-medium">Value : {getDetails.value}</h1>
         </div>
         <div className="flex flex-col items-center gap-6">
           {getAllVouch.length > 0 ? <div>
@@ -309,7 +309,7 @@ export default function Input() {
                 </div>
               );
             })}
-          </div> : <div className="text-lg font-semibold">No Vouchers</div>}
+          </div> : <div className="text-sm md:text-lg font-semibold">No Vouchers</div>}
         </div>
       </div>
     </div>
