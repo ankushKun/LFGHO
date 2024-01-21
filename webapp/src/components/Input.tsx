@@ -14,15 +14,15 @@ export default function Input() {
   const [otherPeopleAddress2, setOtherPeopleAddress2] = useState("");
   const [balanceOfAddress, setBalanceOfAddress] = useState(0);
   const [getAllVouch, setgetAllVouch] = useState<string[]>([
-    "0x295FaF0D270De6d5e9ACDFe287B6844D2335590B",
+    "0x000001",
     "0x000002",
   ]);
   const [getDetails, setgetDetails] = useState({
-    bucketCapacity: 1,
+    bucketCapacity: 0,
     bucketLevel: 0,
     label: "",
-    count: 2,
-    value: 3,
+    count: 0,
+    value: 0,
     addrs: "0x000000",
   });
 
@@ -116,14 +116,17 @@ export default function Input() {
   //This code output or any button of this function will not get shown to user
 
   async function balanceOf(): Promise<any> {
-    await publicClient.readContract({
+    const val = await publicClient.readContract({
       address: "0x000E65B85A0f89f1006bC5202ecBE70D249698Ad",
       abi: lfgho.abi,
       functionName: "balanceOf",
       args: [address],
       account: address as `0x${string}`,
     });
+    setBalanceOfAddress(Number(val));
+    // console.log("Balance Of : "+balanceOfAddress);
   }
+  balanceOf();
   //////////////////////////////////////////////////////////////////////////////////
 
   // All these function reading from smart contract
@@ -155,12 +158,12 @@ export default function Input() {
       account: address as `0x${string}`,
     })) as Details;
     console.log("Value11111111111 : " + value1);
-    //   console.log("Value22222222222 : " +  JSON.stringify(value2 , (key, value) => {
-    //     return typeof value === 'bigint' ? value.toString() : value;
-    // }) );
-    const a: any = JSON.stringify(value2, (key, value) => {
-      return typeof value === "bigint" ? value.toString() : value;
-    });
+
+    const a: any = JSON.parse(
+      JSON.stringify(value2, (key, value) => {
+        return typeof value === "bigint" ? value.toString() : value;
+      })
+    );
 
     setgetAllVouch(value1);
     setgetDetails(a);
