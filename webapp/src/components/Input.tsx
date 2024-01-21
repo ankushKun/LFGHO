@@ -13,7 +13,10 @@ export default function Input() {
   const [otherPeopleAddress1, setOtherPeopleAddress1] = useState("");
   const [otherPeopleAddress2, setOtherPeopleAddress2] = useState("");
   const [balanceOfAddress, setBalanceOfAddress] = useState(0);
-  const [getAllVouch, setgetAllVouch] = useState(["0x000001", "0x000002"]);
+  const [getAllVouch, setgetAllVouch] = useState([
+    "0x295FaF0D270De6d5e9ACDFe287B6844D2335590B",
+    "0x000002",
+  ]);
   const [getDetails, setgetDetails] = useState({
     bucketCapacity: 1,
     bucketLevel: 0,
@@ -163,11 +166,11 @@ export default function Input() {
   //////////////////////////////////////////////////////////////////////////////////
 
   return (
-    <div className="w-full bg-orange-400 flex flex-row">
-      <div className="w-2/4 flex flex-col border-box p-10 gap-20 border-solid border-black border-4">
+    <div className="w-full flex flex-row">
+      <div className="w-2/4 flex flex-col border-box p-10 gap-20">
         <div className="">
           {balanceOfAddress === 1 ? (
-            <div className="bg-red-800 flex flex-row gap-12">
+            <div className=" flex flex-row gap-12">
               <h1 className="text-4xl font-medium	">Revoke as DAO Member</h1>{" "}
               <Ripples
                 color="black"
@@ -183,7 +186,7 @@ export default function Input() {
               </Ripples>
             </div>
           ) : (
-            <div className="bg-red-800 flex flex-row gap-12">
+            <div className=" flex flex-row gap-12">
               <h1 className="text-4xl font-medium	">
                 Want to Become DAO Member
               </h1>{" "}
@@ -205,7 +208,7 @@ export default function Input() {
           )}
         </div>
 
-        <div className="bg-red-800 flex flex-col gap-10">
+        <div className=" flex flex-col gap-10">
           <h1 className="text-4xl font-medium	">
             Do you wanna vouch for anyone? Vouch here{" "}
           </h1>
@@ -234,7 +237,7 @@ export default function Input() {
             </Ripples>
           </div>
         </div>
-        <div className="bg-red-800 flex flex-col gap-10">
+        <div className=" flex flex-col gap-10">
           <h1 className="text-4xl font-medium	">
             Check the Vouches for any address
           </h1>
@@ -264,18 +267,16 @@ export default function Input() {
           </div>
         </div>
       </div>
-      <div className="w-2/4 border-solid border-black border-4 flex flex-col">
-        <div className="bg-red-800 flex flex-col my-0 mx-auto py-5 gap-5">
+      <div className="w-2/4 flex flex-col">
+        <div className=" flex flex-col my-0 mx-auto py-5 gap-5">
           <h1 className="text-6xl font-medium	">count : {getDetails.count}</h1>
           <h1 className="text-6xl font-medium">Value : {getDetails.value}</h1>
         </div>
-        <div>
+        <div className="flex flex-col items-center gap-6">
           {getAllVouch.map((value, key) => {
             return (
               <div>
-                <h1 className="text-4xl">
-                  address {key + 1} : {value}
-                </h1>
+                <h1 className="text-4xl">{value}</h1>
               </div>
             );
           })}
