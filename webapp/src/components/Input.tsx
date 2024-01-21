@@ -14,8 +14,7 @@ export default function Input() {
   const [otherPeopleAddress2, setOtherPeopleAddress2] = useState("");
   const [balanceOfAddress, setBalanceOfAddress] = useState(0);
   const [getAllVouch, setgetAllVouch] = useState<string[]>([
-    "0x000001",
-    "0x000002",
+
   ]);
   const [getDetails, setgetDetails] = useState({
     bucketCapacity: 0,
@@ -23,18 +22,24 @@ export default function Input() {
     label: "",
     count: 0,
     value: 0,
-    addrs: "0x000000",
+    addrs: "",
   });
+  const [updater, setUpdater] = useState<NodeJS.Timeout>();
 
   const {
     address,
   }: // isConnecting,
-  // isDisconnected,
-  { address: string; isConnecting: boolean; isDisconnected: boolean } =
+    // isDisconnected,
+    { address: string; isConnecting: boolean; isDisconnected: boolean } =
     useAccount();
 
   useEffect(() => {
-    let i = setInterval(() => {}, 2000);
+    setUpdater(setInterval(async () => {
+      // console.log("Updating DAO");
+      await balanceOf();
+    }, 2000));
+
+    return clearInterval(updater);
   }, []);
 
   ///////////////////////////////////////////////////////////////////////////////
@@ -97,7 +102,6 @@ export default function Input() {
       account: address as `0x${string}`,
       chain: sepolia,
     });
-    balanceOf();
   }
 
   async function vouch(): Promise<any> {
@@ -129,9 +133,8 @@ export default function Input() {
       account: address as `0x${string}`,
     });
     setBalanceOfAddress(Number(val));
-    // console.log("Balance Of : "+balanceOfAddress);
   }
-  balanceOf();
+  // balanceOf();
   //////////////////////////////////////////////////////////////////////////////////
 
   // All these function reading from smart contract
@@ -195,7 +198,7 @@ export default function Input() {
         <div className="">
           {balanceOfAddress === 1 ? (
             <div className=" flex flex-row gap-12">
-              <h1 className="text-4xl font-medium	">Revoke as DAO Member</h1>{" "}
+              <h1 className="text-4xl font-medium	">Yahooo! You're a DAO member now</h1>{" "}
               <Ripples
                 color="black"
                 during={1200}
@@ -205,7 +208,7 @@ export default function Input() {
                   className="w-44 text-3xl font-medium border-solid border-black border-4 rounded-lg shadow-[-3px_3px_1px_black] "
                   onClick={() => burn()}
                 >
-                  Burn
+                  Leave DAO
                 </button>
               </Ripples>
             </div>
@@ -297,13 +300,16 @@ export default function Input() {
           <h1 className="text-6xl font-medium">Value : {getDetails.value}</h1>
         </div>
         <div className="flex flex-col items-center gap-6">
-          {getAllVouch.map((value, key) => {
-            return (
-              <div key={key}>
-                <h1 className="text-4xl">{value}</h1>
-              </div>
-            );
-          })}
+          {getAllVouch.length > 0 ? <div>
+            Vouchers List:
+            {getAllVouch.map((value, key) => {
+              return (
+                <div key={key}>
+                  <h1 className="text-xl">{value}</h1>
+                </div>
+              );
+            })}
+          </div> : <div className="text-lg font-semibold">No Vouchers</div>}
         </div>
       </div>
     </div>

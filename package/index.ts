@@ -1,1 +1,1 @@
-export { default } from "./VouchButton";
+export { default } from "./Components"

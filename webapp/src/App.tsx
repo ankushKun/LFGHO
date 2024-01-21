@@ -5,7 +5,7 @@ import Input from "./components/Input";
 import useVouch from "../../package"
 
 export default function App() {
-  const KarmaVouch = useVouch("0x295FaF0D270De6d5e9ACDFe287B6844D2335590B")
+  const KarmaVouch = useVouch("0x295FaF0D270De6d5e9ACDFe287B6844D2335590B", import.meta.env.VITE_CONTRACT)
 
   return (
     <div>
@@ -13,8 +13,8 @@ export default function App() {
       <Title />
       <Input />
       <KarmaVouch.VouchButton />
-      <KarmaVouch.JoinDAO />
-      <KarmaVouch.ExitDAO />
+      <KarmaVouch.JoinDAOButton />
+      <KarmaVouch.ExitDAOButton />
     </div>
   );
 }
