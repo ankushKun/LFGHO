@@ -20,7 +20,7 @@ export default function Title() {
             {/* Assuming you want the code block to be full width on small screens and 72 on medium and large screens */}
             <CopyBlock text={code} language={language} theme={dracula} />
           </div>
-          <a href="https://github.com/ankushKun/LFGHO" target="_blank" className=" underline underline-offset-4">View Docs</a>
+          <a href="https://github.com/ankushKun/LFGHO" target="_blank" className=" underline underline-offset-4">View on Github</a>
         </div>
       </div>
     </div>
