@@ -93,6 +93,7 @@ export default function Input() {
       account: address as `0x${string}`,
       chain: sepolia,
     });
+    balanceOf();
   }
 
   async function vouch(): Promise<any> {
