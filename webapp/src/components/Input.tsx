@@ -13,7 +13,7 @@ export default function Input() {
   const [otherPeopleAddress1, setOtherPeopleAddress1] = useState("");
   const [otherPeopleAddress2, setOtherPeopleAddress2] = useState("");
   const [balanceOfAddress, setBalanceOfAddress] = useState(0);
-  const [getAllVouch, setgetAllVouch] = useState([
+  const [getAllVouch, setgetAllVouch] = useState<string[]>([
     "0x295FaF0D270De6d5e9ACDFe287B6844D2335590B",
     "0x000002",
   ]);
@@ -77,7 +77,7 @@ export default function Input() {
       abi: lfgho.abi,
       functionName: "mint",
       args: [address, 1],
-      account: address,
+      account: address as `0x${string}`,
       chain: sepolia,
     });
   }
@@ -90,7 +90,7 @@ export default function Input() {
       abi: lfgho.abi,
       functionName: "burn",
       args: [1],
-      account: address,
+      account: address as `0x${string}`,
       chain: sepolia,
     });
   }
@@ -103,7 +103,7 @@ export default function Input() {
       abi: lfgho.abi,
       functionName: "vouch",
       args: [otherPeopleAddress1],
-      account: address,
+      account: address as `0x${string}`,
       chain: sepolia,
     });
     setOtherPeopleAddress1("");
@@ -121,12 +121,22 @@ export default function Input() {
       abi: lfgho.abi,
       functionName: "balanceOf",
       args: [address],
-      account: address,
+      account: address as `0x${string}`,
     });
   }
   //////////////////////////////////////////////////////////////////////////////////
 
   // All these function reading from smart contract
+
+  type Details = {
+    bucketCapacity: number,
+    bucketLevel: number,
+    label: string,
+    count: number,
+    value: number,
+    addrs: string
+  }
+
 
   // getAllVouch will return ====>  string[]
   // getDetails will return ====> {bucketCapacity : number, bucketLevel : number, label : string, count : number, value : number, addrs : string}
@@ -136,15 +146,15 @@ export default function Input() {
       abi: lfgho.abi,
       functionName: "getAllVouch",
       args: [otherPeopleAddress2],
-      account: address,
-    });
+      account: address as `0x${string}`,
+    }) as string[];
     const value2 = await publicClient.readContract({
       address: "0x5f6734B2ee6cF2bBf05AAF7aBf03ddCEBE439049",
       abi: lfgho.abi,
       functionName: "getDetails",
       args: [otherPeopleAddress2],
-      account: address,
-    });
+      account: address as `0x${string}`,
+    }) as Details;
     console.log("Value11111111111 : " + value1);
     console.log("Value22222222222 : " + value2);
     setgetAllVouch(value1);
@@ -158,7 +168,7 @@ export default function Input() {
   //     abi: lfgho.abi,
   //     functionName: "getDetails",
   //     args: [otherPeopleAddress2],
-  //     account: address,
+  //     account: address as `0x${string}`,
   //   });
   //   setOtherPeopleAddress2("");
   // }
