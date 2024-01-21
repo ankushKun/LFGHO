@@ -1,12 +1,12 @@
 {
   "name": "karma-vouch",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "description": "On chain karma points and vouching system for DAOs",
   "repository": {
     "type": "git",
     "url": "https://github.com/ankushKun/LFGHO.git"
   },
-  "homepage": "",
+  "homepage": "https://karma-vouch.vercel.app/",
   "keywords": [
     "DAO",
     "vouching",
