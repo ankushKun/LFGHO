@@ -74,7 +74,6 @@ To get VITE_WC_KEY click [here](https://cloud.walletconnect.com/sign-in)
 
  # Finally run the webapp
 
-bash
 ```bash
 npm run dev
 ```
