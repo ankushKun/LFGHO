@@ -1,13 +1,13 @@
 import React from "react";
 import lfgho from "../../../contracts/artifacts/contracts/lfgho.sol/lfgho.json";
 import Ripples from "react-ripples";
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAccount } from "wagmi";
 import { createWalletClient, custom, createPublicClient, http } from "viem";
 import { sepolia } from "viem/chains";
 
-const contractAdds: `0x${string}` = "0x000E65B85A0f89f1006bC5202ecBE70D249698Ad"
+const contractAdds: `0x${string}` =
+  "0x000E65B85A0f89f1006bC5202ecBE70D249698Ad";
 
 export default function Input() {
   const [otherPeopleAddress1, setOtherPeopleAddress1] = useState("");
@@ -28,10 +28,14 @@ export default function Input() {
 
   const {
     address,
-    // isConnecting,
-    // isDisconnected,
-  }: { address: string; isConnecting: boolean; isDisconnected: boolean } =
+  }: // isConnecting,
+  // isDisconnected,
+  { address: string; isConnecting: boolean; isDisconnected: boolean } =
     useAccount();
+
+  useEffect(() => {
+    let i = setInterval(() => {}, 2000);
+  }, []);
 
   ///////////////////////////////////////////////////////////////////////////////
 
@@ -73,7 +77,7 @@ export default function Input() {
     // const un = await walletClient.getAddresses();
     // console.log(typeof(un[0]));
     await walletClient.writeContract({
-      address: import.meta.env.VITE_CONTRACT as `0x${string}` || contractAdds,
+      address: (import.meta.env.VITE_CONTRACT as `0x${string}`) || contractAdds,
       abi: lfgho.abi,
       functionName: "mint",
       args: [address, 1],
@@ -86,7 +90,7 @@ export default function Input() {
     // const un = await walletClient.getAddresses();
     // console.log(typeof(un[0]));
     await walletClient.writeContract({
-      address: import.meta.env.VITE_CONTRACT as `0x${string}` || contractAdds,
+      address: (import.meta.env.VITE_CONTRACT as `0x${string}`) || contractAdds,
       abi: lfgho.abi,
       functionName: "burn",
       args: [1],
@@ -100,7 +104,7 @@ export default function Input() {
     // const un = await walletClient.getAddresses();
     // console.log(typeof(un[0]));
     await walletClient.writeContract({
-      address: import.meta.env.VITE_CONTRACT as `0x${string}` || contractAdds,
+      address: (import.meta.env.VITE_CONTRACT as `0x${string}`) || contractAdds,
       abi: lfgho.abi,
       functionName: "vouch",
       args: [otherPeopleAddress1],
@@ -118,7 +122,7 @@ export default function Input() {
 
   async function balanceOf(): Promise<any> {
     const val = await publicClient.readContract({
-      address: import.meta.env.VITE_CONTRACT as `0x${string}` || contractAdds,
+      address: (import.meta.env.VITE_CONTRACT as `0x${string}`) || contractAdds,
       abi: lfgho.abi,
       functionName: "balanceOf",
       args: [address],
@@ -145,14 +149,14 @@ export default function Input() {
   // getDetails will return ====> {bucketCapacity : number, bucketLevel : number, label : string, count : number, value : number, addrs : string}
   async function vouchDetails(): Promise<any> {
     const value1 = (await publicClient.readContract({
-      address: import.meta.env.VITE_CONTRACT as `0x${string}` || contractAdds,
+      address: (import.meta.env.VITE_CONTRACT as `0x${string}`) || contractAdds,
       abi: lfgho.abi,
       functionName: "getAllVouch",
       args: [otherPeopleAddress2],
       account: address as `0x${string}`,
     })) as string[];
     const value2 = (await publicClient.readContract({
-      address: import.meta.env.VITE_CONTRACT as `0x${string}` || contractAdds,
+      address: (import.meta.env.VITE_CONTRACT as `0x${string}`) || contractAdds,
       abi: lfgho.abi,
       functionName: "getDetails",
       args: [otherPeopleAddress2],
