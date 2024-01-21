@@ -1,5 +1,6 @@
 import React from "react";
 import lfgho from "../../../contracts/artifacts/contracts/lfgho.sol/lfgho.json";
+import Ripples from "react-ripples";
 import { ConnectKitButton } from "connectkit";
 import { useState } from "react";
 import { useAccount } from "wagmi";
@@ -140,6 +141,8 @@ export default function Input() {
       args: [otherPeopleAddress2],
       account: address,
     });
+    console.log("Value11111111111 : " + value1);
+    console.log("Value22222222222 : " + value2);
     setgetAllVouch(value1);
     setgetDetails(value2);
     setOtherPeopleAddress2("");
@@ -159,54 +162,97 @@ export default function Input() {
   //////////////////////////////////////////////////////////////////////////////////
 
   return (
-    <div className="">
-      <div>
-        {balanceOfAddress === 1 ? (
-          <div>
-            <h1>Revoke as DAO Member</h1>{" "}
-            <button onClick={() => burn()}>Burn</button>
+    <div className="w-full bg-orange-400 flex flex-row">
+      <div className="w-2/4 flex flex-col border-box p-10 gap-20 border-solid border-black border-4">
+        <div className="">
+          {balanceOfAddress === 1 ? (
+            <div>
+              <h1 className="">Revoke as DAO Member</h1>{" "}
+              <button onClick={() => burn()}>Burn</button>
+            </div>
+          ) : (
+            <div className="bg-red-800 flex flex-row gap-12">
+              <h1 className="text-4xl">Want to Become DAO Member</h1>{" "}
+              {/*text-5xl*/}
+              <Ripples
+                color="black"
+                during={1200}
+                placeholder={"Random Anything"}
+              >
+                <button
+                  className="w-44 text-3xl border-solid border-black border-4 rounded-lg shadow-[-3px_3px_1px_black] "
+                  onClick={() => mint()}
+                >
+                  Mint
+                </button>{" "}
+              </Ripples>
+              {/*w-44 text-3xl*/}
+            </div>
+          )}
+        </div>
+
+        <div className="bg-red-800 flex flex-col gap-10">
+          <h1 className="text-4xl">
+            Do you wanna vouch for anyone? Vouch here{" "}
+          </h1>
+          <div className="flex flex-row justify-center gap-10 ">
+            <input
+              className="w-2/4 border-solid border-black border-4 bg-slate-600 rounded-md text-3xl"
+              type="text"
+              autoComplete="off"
+              value={otherPeopleAddress1}
+              onChange={getInput}
+              name="address1"
+              id="address1"
+              placeholder="Address"
+            ></input>{" "}
+            <Ripples
+              color="black"
+              during={1200}
+              placeholder={"Random Anything"}
+            >
+              <button
+                className="w-44 text-3xl border-solid border-black border-4 rounded-lg shadow-[-3px_3px_1px_black]"
+                onClick={() => vouch()}
+              >
+                Vouch
+              </button>
+            </Ripples>
           </div>
-        ) : (
-          <div>
-            <h1>Want to Become DAO Member</h1>{" "}
-            <button onClick={() => mint()}>Mint</button>
+        </div>
+        <div className="bg-red-800 flex flex-col gap-10">
+          <h1 className="text-4xl">Check the Vouches for any address</h1>
+          <div className="flex flex-row justify-center pl-4 gap-10 ">
+            <input
+              className="w-2/4 border-solid border-black border-4 bg-slate-600 rounded-md text-3xl"
+              type="text"
+              autoComplete="off"
+              value={otherPeopleAddress2}
+              onChange={getInput}
+              name="address2"
+              id="address2"
+              placeholder="Address"
+            ></input>{" "}
+            <Ripples
+              color="black"
+              during={1200}
+              placeholder={"Random Anything"}
+            >
+              <button
+                className="w-64 text-3xl border-solid border-black border-4 rounded-lg shadow-[-3px_3px_1px_black] "
+                onClick={() => vouchDetails()}
+              >
+                Check Vouches
+              </button>
+            </Ripples>
           </div>
-        )}
+        </div>
       </div>
-      {/* <div>
-        <h1>Revoke as DAO Member</h1>{" "}
-        <button onClick={() => burn()}>Burn</button>
-      </div> */}
-      <div>
-        <h1>Do you wanna vouch for anyone? DO here </h1>
-        <input
-          className="bg-slate-600"
-          type="text"
-          autoComplete="off"
-          value={otherPeopleAddress1}
-          onChange={getInput}
-          name="address1"
-          id="address1"
-          placeholder="Address"
-        ></input>{" "}
-        <button onClick={() => vouch()}>Vouch</button>
-      </div>
-      <div>
-        <h1>Check the Vouches for any address</h1>
-        <input
-          className="bg-slate-600"
-          type="text"
-          autoComplete="off"
-          value={otherPeopleAddress2}
-          onChange={getInput}
-          name="address2"
-          id="address2"
-          placeholder="Address"
-        ></input>{" "}
-        <button onClick={() => vouchDetails()}>Get All Vouches</button>
-      </div>
-      <div>
-        {" "}
+      <div className="w-2/4 border-solid border-black border-4">
+        <div>
+          <h1>count : {getDetails.count}</h1>
+          <h1>Value : {getDetails.value}</h1>
+        </div>
         <div>
           {getAllVouch.map((value, key) => {
             return (
@@ -215,10 +261,6 @@ export default function Input() {
               </div>
             );
           })}
-        </div>
-        <div>
-          <h1>count : {getDetails.count}</h1>
-          <h1>Value : {getDetails.value}</h1>
         </div>
       </div>
     </div>

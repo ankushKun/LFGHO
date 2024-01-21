@@ -36,3 +36,14 @@ npm i react-code-blocks
 ```bash
 npm install connectkit wagmi@1.x viem@1.x
 ```
+
+```bash
+npm install --save react-ripples
+```
+
+If you encounter with any error after using "react-ripples" or <Ripples>, Use this then :  
+```bash
+npm install prop-types
+```
+
+
