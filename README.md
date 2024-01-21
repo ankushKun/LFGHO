@@ -1,3 +1,5 @@
+![Picnic](https://github.com/ankushKun/LFGHO/assets/81790585/b24d1060-8be2-4f7d-8876-85bd590838d1)
+
 # Karma Vouch
 
 An on-chain vouch based Karma system for DAOs, enabling a trust based approach for figuring out the legitimacy of an Address
