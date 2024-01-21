@@ -1,6 +1,7 @@
 import React from "react";
 import lfgho from "../../../contracts/artifacts/contracts/lfgho.sol/lfgho.json";
 import Ripples from "react-ripples";
+
 import { ConnectKitButton } from "connectkit";
 import { useState } from "react";
 import { useAccount } from "wagmi";
@@ -12,7 +13,7 @@ export default function Input() {
   const [otherPeopleAddress1, setOtherPeopleAddress1] = useState("");
   const [otherPeopleAddress2, setOtherPeopleAddress2] = useState("");
   const [balanceOfAddress, setBalanceOfAddress] = useState(0);
-  const [getAllVouch, setgetAllVouch] = useState(["0x000001"]);
+  const [getAllVouch, setgetAllVouch] = useState(["0x000001", "0x000002"]);
   const [getDetails, setgetDetails] = useState({
     bucketCapacity: 1,
     bucketLevel: 0,
@@ -166,13 +167,26 @@ export default function Input() {
       <div className="w-2/4 flex flex-col border-box p-10 gap-20 border-solid border-black border-4">
         <div className="">
           {balanceOfAddress === 1 ? (
-            <div>
-              <h1 className="">Revoke as DAO Member</h1>{" "}
-              <button onClick={() => burn()}>Burn</button>
+            <div className="bg-red-800 flex flex-row gap-12">
+              <h1 className="text-4xl font-medium	">Revoke as DAO Member</h1>{" "}
+              <Ripples
+                color="black"
+                during={1200}
+                placeholder={"Random Anything"}
+              >
+                <button
+                  className="w-44 text-3xl font-medium border-solid border-black border-4 rounded-lg shadow-[-3px_3px_1px_black] "
+                  onClick={() => burn()}
+                >
+                  Burn
+                </button>
+              </Ripples>
             </div>
           ) : (
             <div className="bg-red-800 flex flex-row gap-12">
-              <h1 className="text-4xl">Want to Become DAO Member</h1>{" "}
+              <h1 className="text-4xl font-medium	">
+                Want to Become DAO Member
+              </h1>{" "}
               {/*text-5xl*/}
               <Ripples
                 color="black"
@@ -180,7 +194,7 @@ export default function Input() {
                 placeholder={"Random Anything"}
               >
                 <button
-                  className="w-44 text-3xl border-solid border-black border-4 rounded-lg shadow-[-3px_3px_1px_black] "
+                  className="w-44 text-3xl font-medium border-solid border-black border-4 rounded-lg shadow-[-3px_3px_1px_black] "
                   onClick={() => mint()}
                 >
                   Mint
@@ -192,7 +206,7 @@ export default function Input() {
         </div>
 
         <div className="bg-red-800 flex flex-col gap-10">
-          <h1 className="text-4xl">
+          <h1 className="text-4xl font-medium	">
             Do you wanna vouch for anyone? Vouch here{" "}
           </h1>
           <div className="flex flex-row justify-center gap-10 ">
@@ -212,7 +226,7 @@ export default function Input() {
               placeholder={"Random Anything"}
             >
               <button
-                className="w-44 text-3xl border-solid border-black border-4 rounded-lg shadow-[-3px_3px_1px_black]"
+                className="w-44 text-3xl font-medium border-solid border-black border-4 rounded-lg shadow-[-3px_3px_1px_black]"
                 onClick={() => vouch()}
               >
                 Vouch
@@ -221,7 +235,9 @@ export default function Input() {
           </div>
         </div>
         <div className="bg-red-800 flex flex-col gap-10">
-          <h1 className="text-4xl">Check the Vouches for any address</h1>
+          <h1 className="text-4xl font-medium	">
+            Check the Vouches for any address
+          </h1>
           <div className="flex flex-row justify-center pl-4 gap-10 ">
             <input
               className="w-2/4 border-solid border-black border-4 bg-slate-600 rounded-md text-3xl"
@@ -239,7 +255,7 @@ export default function Input() {
               placeholder={"Random Anything"}
             >
               <button
-                className="w-64 text-3xl border-solid border-black border-4 rounded-lg shadow-[-3px_3px_1px_black] "
+                className="w-64 text-3xl font-medium   border-solid border-black border-4 rounded-lg shadow-[-3px_3px_1px_black] "
                 onClick={() => vouchDetails()}
               >
                 Check Vouches
@@ -248,16 +264,18 @@ export default function Input() {
           </div>
         </div>
       </div>
-      <div className="w-2/4 border-solid border-black border-4">
-        <div>
-          <h1>count : {getDetails.count}</h1>
-          <h1>Value : {getDetails.value}</h1>
+      <div className="w-2/4 border-solid border-black border-4 flex flex-col">
+        <div className="bg-red-800 flex flex-col my-0 mx-auto py-5 gap-5">
+          <h1 className="text-6xl font-medium	">count : {getDetails.count}</h1>
+          <h1 className="text-6xl font-medium">Value : {getDetails.value}</h1>
         </div>
         <div>
           {getAllVouch.map((value, key) => {
             return (
               <div>
-                <h1>address : {value}</h1>
+                <h1 className="text-4xl">
+                  address {key + 1} : {value}
+                </h1>
               </div>
             );
           })}
