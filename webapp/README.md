@@ -52,10 +52,11 @@ npm install
 
 Create a .env file in webapp folder and add the following variables:
 
-bash
+```bash
 VITE_INFURA_KEY="Your Infura Key"
 VITE_WC_KEY="ProjectId"
 VITE_CONTRACT="0x000E65B85A0f89f1006bC5202ecBE70D249698Ad"
+```
 
 To get VITE_WC_KEY click [here](https://cloud.walletconnect.com/sign-in) 
  - Click on create project
