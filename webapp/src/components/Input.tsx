@@ -195,7 +195,8 @@ export default function Input() {
   return (
     <div className="w-full flex flex-row">
       <div className="w-2/4 flex flex-col border-box p-10 gap-20">
-        <div className="">
+        
+        <div className="border border-black p-7">
           {balanceOfAddress === 1 ? (
             <div className=" flex flex-row gap-12">
               <h1 className="text-4xl font-medium	">Yahooo! You're a DAO member now</h1>{" "}
@@ -235,13 +236,13 @@ export default function Input() {
           )}
         </div>
 
-        <div className=" flex flex-col gap-10">
+        <div className=" flex flex-col gap-10 border border-black p-7">
           <h1 className="text-4xl font-medium	">
             Do you wanna vouch for anyone? Vouch here{" "}
           </h1>
           <div className="flex flex-row justify-center gap-10 ">
             <input
-              className="w-2/4 border-solid border-black border-4 bg-slate-600 rounded-md text-3xl"
+              className="w-2/4 p-2 border-solid border-black border-4 bg-slate-600 rounded-md text-3xl"
               type="text"
               autoComplete="off"
               value={otherPeopleAddress1}
@@ -264,13 +265,13 @@ export default function Input() {
             </Ripples>
           </div>
         </div>
-        <div className=" flex flex-col gap-10">
+        <div className=" flex flex-col gap-10 border border-black p-7 shadow-md">
           <h1 className="text-4xl font-medium	">
             Check the Vouches for any address
           </h1>
           <div className="flex flex-row justify-center pl-4 gap-10 ">
             <input
-              className="w-2/4 border-solid border-black border-4 bg-slate-600 rounded-md text-3xl"
+              className="w-2/4 p-2 border-solid border-black border-4 bg-slate-600 rounded-md text-3xl"
               type="text"
               autoComplete="off"
               value={otherPeopleAddress2}
